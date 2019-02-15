@@ -64,7 +64,7 @@ declare module "react-native-yusha-customkeyboard" {
     //listener
     type iOSKeyBoardSubscription = 'keyboardDidShow' | 'keyboardDidHide'
     type KeyBoardSubscription = EmitterSubscription | iOSKeyBoardSubscription
-    export function addKeyBoardHideListener(): KeyBoardSubscription
-    export function addKeyBoardShowListener(): KeyBoardSubscription
-    export function removeKeyBoardListener(subscription: KeyBoardSubscription): void
+    export function addKeyboardHideListener(): KeyBoardSubscription
+    export function addKeyboardShowListener(): KeyBoardSubscription
+    export function removeKeyboardListener(subscription: KeyBoardSubscription): void
 }

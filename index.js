@@ -1,25 +1,21 @@
-//@flow
-
 import {
     keyBoardAPI,
-
-    addKeyBoardHideListener,
-    addKeyBoardShowListener,
-    removeKeyBoardListener,
-
-    currentHeight,
-
     CustomTextInput,
 } from './customKeyboard'
 
+import { 
+    addKeyboardHideListener,
+    addKeyboardShowListener,
+    removeKeyboardListener,
+} from './keyboardEvents';
+
+import CustomKeyBoardView from './CustomKeyboardView';
+
 export {
-    addKeyBoardHideListener,
-    removeKeyBoardListener,
-    addKeyBoardShowListener,
-
-    currentHeight,
-
+    addKeyboardHideListener,
+    removeKeyboardListener,
+    addKeyboardShowListener,
     CustomTextInput,
-
     keyBoardAPI,
+    CustomKeyBoardView,
 }
