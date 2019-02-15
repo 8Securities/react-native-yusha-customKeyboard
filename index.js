@@ -9,7 +9,7 @@ import {
     removeKeyboardListener,
 } from './keyboardEvents';
 
-import CustomKeyBoardView from './CustomKeyboardView';
+import CustomKeyboardView from './CustomKeyboardView';
 
 export {
     addKeyboardHideListener,
@@ -17,5 +17,5 @@ export {
     addKeyboardShowListener,
     CustomTextInput,
     keyBoardAPI,
-    CustomKeyBoardView,
+    CustomKeyboardView,
 }
