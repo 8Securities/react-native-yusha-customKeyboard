@@ -7,7 +7,7 @@ import {
   DeviceInfo,
 } from 'react-native';
 
-class KeyboardView extends React.Component {
+class CustomKeyboardView extends React.Component {
   state;
   backSpaceRequest;
   insertTextRequest;
@@ -130,4 +130,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default KeyboardView;
+export default CustomKeyboardView;

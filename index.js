@@ -9,13 +9,10 @@ import {
     removeKeyboardListener,
 } from './keyboardEvents';
 
-import CustomKeyboardView from './CustomKeyboardView';
-
 export {
     addKeyboardHideListener,
     removeKeyboardListener,
     addKeyboardShowListener,
     CustomTextInput,
     keyBoardAPI,
-    CustomKeyboardView,
 }
