@@ -124,15 +124,15 @@ export class CustomTextInput extends Component {
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
-_handleAppStateChange = (nextAppState: string) => {
-    if (nextAppState === 'background') {
-        //检查键盘
-        if (TextInput.State.currentlyFocusedField() === findNodeHandle(this.input)) {
-            TextInput.State.blurTextInput(TextInput.State.currentlyFocusedField())
-            return true
-        }
-    }
-}
+  _handleAppStateChange = (nextAppState: string) => {
+      if (nextAppState === 'background') {
+          //检查键盘
+          if (TextInput.State.currentlyFocusedField() === findNodeHandle(this.input)) {
+              TextInput.State.blurTextInput(TextInput.State.currentlyFocusedField())
+              return true
+          }
+      }
+  }
 
   componentWillReceiveProps(newProps) {
     if (newProps.customKeyboardType !== this.props.customKeyboardType) {

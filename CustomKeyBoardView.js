@@ -14,9 +14,6 @@ import {
     DeviceInfo,
 } from 'react-native';
 
-//提示
-import {KeyTip} from './views'
-
 export default class KeyBoard extends Component{
     state: Object
     backSpaceRequest: number
@@ -35,7 +32,6 @@ export default class KeyBoard extends Component{
         super(...arguments)
         this.state = {
             width: 0,
-            showTip: {isShow:false, layout:{x:0,y:0,width:0,height:0}, keyValue:""}
         }
     }
 
@@ -67,38 +63,12 @@ export default class KeyBoard extends Component{
         })
     }
 
-    //{isShow, ref, keyValue}
-    _showTip = (showTipData) => {
-        if(showTipData.isShow) {
-            showTipData.ref.measureLayout(findNodeHandle(this.refs.keyboard), (left, top, width, height) => {
-                console.log(`key: ${showTipData.keyValue} left:${left} top:${top} width:${width} height:${height}`)
-                //{isShow:false, layout:{x:0,y:0,width:0,height:0}, keyValue:""}
-                this.setState({...this.state, showTip:{...showTipData, layout:{x:left, y:top, width, height}}})
-            })
-        } else {
-            this.setState({...this.state, showTip:showTipData})
-        }
-    }
-
     _onLayout = ({ nativeEvent }) => {
         const width = nativeEvent.layout.width
         let height = nativeEvent.layout.height
         if (width > 0 && width !== this.state.width) {
             this.setState({ ...this.state, width })
         }
-    }
-
-    _renderTip = () => {
-        const {isShow, layout, keyValue} = this.state.showTip
-        return isShow ?
-            (
-                <KeyTip
-                    layout = {layout}
-                    keyValue = {keyValue}
-                />
-            )
-            :
-            null
     }
 
     componentWillUnmount() {
@@ -134,10 +104,8 @@ export default class KeyBoard extends Component{
                         onKeyPress={this._handleKeyPress}
                         onDelete={this._handleDelete}
                         onClearAll={this._handlerClearAll}
-                        showTip={this._showTip}
                     />
                 </View>
-                {this._renderTip()}
             </View>
         )
     }
