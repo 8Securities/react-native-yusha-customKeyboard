@@ -43,7 +43,7 @@ export const clearFocus = (tag) => {
   TextInput.State.blurTextInput(tag);
 };
 
-const CustomKeyboardContainer = ({ tag, type }) => {
+const CustomKeyboardContainer = ({ tag, type, ...rest }) => {
   const factory = keyboardTypeRegistry[type];
 
   if (!factory) {
@@ -146,25 +146,23 @@ export class CustomTextInput extends React.Component {
   }
 }
 
-export function keyBoardAPI(keyboardName) {
-  return function(KeyboardView) {
-    class KeyBoard extends React.Component {
-      render() {
-        return (
-          <CustomKeyboardView
-            insertText={insertText}
-            clearFocus={clearFocus}
-            clearAll={clearAll}
-            backSpace={backSpace}
-            KeyboardView={KeyboardView}
-            {...this.props}
-          />
-        );
-      }
+export function keyBoardAPI(keyboardName, KeyboardView) {
+  class KeyBoard extends React.Component {
+    render() {
+      return (
+        <CustomKeyboardView
+          insertText={insertText}
+          clearFocus={clearFocus}
+          clearAll={clearAll}
+          backSpace={backSpace}
+          KeyboardView={KeyboardView}
+          {...this.props}
+        />
+      );
     }
-
-    register(keyboardName, () => KeyBoard);
-
-    return KeyBoard;
   }
+
+  register(keyboardName, () => KeyBoard);
+
+  return KeyBoard;
 }

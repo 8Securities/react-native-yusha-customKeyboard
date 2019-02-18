@@ -70,24 +70,12 @@ class CustomKeyboardView extends React.Component {
     return (
       <View onLayout={this.onLayout} style={styles.container} ref="keyboard" pointerEvents="box-none">
         <View style={styles.keyboard} key="keyboard">
-          {!KeyboardView.customKeyboardTop && (
-            <View style={styles.top}>
-              <View style={styles.topLeft}>
-                {KeyboardView.getKeyBoardIcon && KeyboardView.getKeyBoardIcon()}
-                <Text style={styles.topDesText}>{KeyboardView.getKeyBoardName && KeyboardView.getKeyBoardName()}</Text>
-              </View>
-
-              <TouchableOpacity onPress={this.clearFocus}>
-                <Text style={styles.topCompleteText}>完成</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-
           <KeyboardView
             {...this.props}
             onKeyPress={this.handleKeyPress}
             onDelete={this.handleDelete}
             onClearAll={this.handleClearAll}
+            keyboardHeight={DeviceInfo.isIPhoneX_deprecated ? 286 : 252}
           />
         </View>
       </View>

@@ -30,8 +30,7 @@ declare module "react-native-yusha-customkeyboard" {
         getKeyBoardName?: () => string, //返回键盘名称
     }
     type CustomKeyboardViewProps<P> = ComponentType<P & InjectedKeyboardApiProps> & WrapedCustomKeyboardViewConfig;
-    type KeyboardDecorator<P> = (component: CustomKeyboardViewProps<P>) => ComponentType<any>;
-    export function keyBoardAPI<P>(customKeyboardType: string): KeyboardDecorator<P>;
+    export function keyBoardAPI<P>(customKeyboardType: string, KeyboardComponent: ComponentType<any>): any;
 
     //NumberKeyBoardView
     interface NumberKeyBoardViewProps {
@@ -53,7 +52,7 @@ declare module "react-native-yusha-customkeyboard" {
     export type AwareCusKeyBoardScrollView = ScrollViewStatic;
 
     //CustomTextInput
-    type CustomTextInputProps = { customKeyboardType: string }
+    type CustomTextInputProps = { customKeyboardType?: string }
     type CustomTextInputStatic = React.ComponentClass<TextInputProps & CustomTextInputProps>
     export var CustomTextInput: CustomTextInputStatic;
     export type CustomTextInput = CustomTextInputStatic;
