@@ -11,6 +11,24 @@
 {
     return dispatch_get_main_queue();
 }
+
+- (NSDictionary *)constantsToExport
+{
+    UIViewController *currentController = RCTPresentedViewController();
+    UIView *rootView = currentController != nil ? currentController.view : nil;
+    int keyboardHeight = 252;
+
+    if ( rootView != nil ) {
+        if (@available(iOS 11.0, *)) {
+            if (rootView.safeAreaInsets.bottom > 0) {
+                keyboardHeight = 286;
+            }
+        }
+    }
+
+    return @{ @"keyboardHeight": @(keyboardHeight) };
+}
+
 RCT_EXPORT_MODULE(CustomKeyboard)
 
 RCT_EXPORT_METHOD(install:(nonnull NSNumber *)reactTag withType:(nonnull NSString *)keyboardType)
@@ -21,9 +39,9 @@ RCT_EXPORT_METHOD(install:(nonnull NSNumber *)reactTag withType:(nonnull NSStrin
                            @"type": keyboardType
                            }
                          ];
-    
+
     inputView.autoresizingMask = UIViewAutoresizingNone;
-    inputView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 252);
+    inputView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, keyboardHeight);
     
     UITextField *view = (UITextField *)(((RCTBaseTextInputView*)[_bridge.uiManager viewForReactTag:reactTag]).backedTextInputView);
     

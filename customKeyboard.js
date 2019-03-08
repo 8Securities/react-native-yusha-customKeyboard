@@ -22,7 +22,7 @@ const {
   insertText, backSpace, doDelete,
   moveLeft, moveRight,
   switchSystemKeyboard,
-  clearAll,
+  clearAll, keyboardHeight
 } = CustomKeyboard;
 
 export {
@@ -155,6 +155,8 @@ export function keyBoardAPI(keyboardName, KeyboardView) {
           clearFocus={clearFocus}
           clearAll={clearAll}
           backSpace={backSpace}
+          keyboardContainerHeight={keyboardHeight}
+          keyboardViewHeight={252}
           KeyboardView={KeyboardView}
           {...this.props}
         />

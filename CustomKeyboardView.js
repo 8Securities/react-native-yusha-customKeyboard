@@ -1,10 +1,7 @@
 import React from 'react';
 import {
-  TouchableOpacity,
-  Text,
   View,
   StyleSheet,
-  DeviceInfo,
 } from 'react-native';
 
 class CustomKeyboardView extends React.Component {
@@ -69,13 +66,14 @@ class CustomKeyboardView extends React.Component {
 
     return (
       <View onLayout={this.onLayout} style={styles.container} ref="keyboard" pointerEvents="box-none">
-        <View style={styles.keyboard} key="keyboard">
+        <View style={{ height: this.props.keyboardContainerHeight }} key="keyboard">
           <KeyboardView
             {...this.props}
             onKeyPress={this.handleKeyPress}
             onDelete={this.handleDelete}
             onClearAll={this.handleClearAll}
-            keyboardHeight={DeviceInfo.isIPhoneX_deprecated ? 286 : 252}
+            keyboardContainerHeight={this.props.keyboardContainerHeight}
+            keyboardViewHeight={this.props.keyboardViewHeight}
           />
         </View>
       </View>
@@ -85,13 +83,8 @@ class CustomKeyboardView extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: 'transparent',
-    justifyContent: 'flex-end',
-  },
-  keyboard: {
-    backgroundColor: '#f6f5f2',
-    height: DeviceInfo.isIPhoneX_deprecated ? 286 : 252,
+    justifyContent: 'flex-start',
   },
   top: {
     height: 36,
