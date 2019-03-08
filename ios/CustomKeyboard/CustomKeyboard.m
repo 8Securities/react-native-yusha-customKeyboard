@@ -3,18 +3,20 @@
 #import <React/RCTUIManager.h>
 #import "RCTBaseTextInputView.h"
 
-@interface CustomKeyboard()
-@property (nonatomic) bool hasSafeArea;
-@end
-
 @implementation CustomKeyboard
 
 @synthesize bridge = _bridge;
-@synthesize hasSafeArea;
+
+RCT_EXPORT_MODULE(CustomKeyboard)
 
 - (dispatch_queue_t)methodQueue
 {
     return dispatch_get_main_queue();
+}
+
++ (BOOL)requiresMainQueueSetup
+{
+    return YES;
 }
 
 - (NSDictionary *)constantsToExport
@@ -34,8 +36,6 @@
     return @{ @"keyboardHeight": @(keyboardHeight) };
 }
 
-RCT_EXPORT_MODULE(CustomKeyboard)
-
 RCT_EXPORT_METHOD(install:(nonnull NSNumber *)reactTag withType:(nonnull NSString *)keyboardType)
 {
     UIViewController *currentController = RCTPresentedViewController();
@@ -51,11 +51,11 @@ RCT_EXPORT_METHOD(install:(nonnull NSNumber *)reactTag withType:(nonnull NSStrin
     }
     
     UIView* inputView = [[RCTRootView alloc] initWithBridge:_bridge moduleName:@"CustomKeyboard" initialProperties:
-                         @{
-                           @"tag": reactTag,
-                           @"type": keyboardType
-                           }
-                         ];
+                        @{
+                            @"tag": reactTag,
+                            @"type": keyboardType
+                        }
+                        ];
 
     inputView.autoresizingMask = UIViewAutoresizingNone;
     inputView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, keyboardHeight);
