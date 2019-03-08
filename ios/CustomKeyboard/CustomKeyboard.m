@@ -3,9 +3,14 @@
 #import <React/RCTUIManager.h>
 #import "RCTBaseTextInputView.h"
 
+@interface CustomKeyboard()
+@property (nonatomic) bool hasSafeArea;
+@end
+
 @implementation CustomKeyboard
 
 @synthesize bridge = _bridge;
+@synthesize hasSafeArea;
 
 - (dispatch_queue_t)methodQueue
 {
@@ -33,6 +38,18 @@ RCT_EXPORT_MODULE(CustomKeyboard)
 
 RCT_EXPORT_METHOD(install:(nonnull NSNumber *)reactTag withType:(nonnull NSString *)keyboardType)
 {
+    UIViewController *currentController = RCTPresentedViewController();
+    UIView *rootView = currentController != nil ? currentController.view : nil;
+    int keyboardHeight = 252;
+
+    if ( rootView != nil ) {
+        if (@available(iOS 11.0, *)) {
+            if (rootView.safeAreaInsets.bottom > 0) {
+                keyboardHeight = 286;
+            }
+        }
+    }
+    
     UIView* inputView = [[RCTRootView alloc] initWithBridge:_bridge moduleName:@"CustomKeyboard" initialProperties:
                          @{
                            @"tag": reactTag,
