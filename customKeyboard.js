@@ -72,6 +72,10 @@ export class CustomTextInput extends React.Component {
           this.hideSub = addKeyboardHideListener(this.hideKeyboard);
         }
 
+        if (this.props.autoFocus) {
+          TextInput.State.focusTextInput(findNodeHandle(this.input));
+        }
+
         AppState.addEventListener('change', this.handleAppStateChange);
       }, 300)
     }
@@ -128,7 +132,7 @@ export class CustomTextInput extends React.Component {
   };
 
   render() {
-    const { customKeyboardType, ...others } = this.props;
+    const { customKeyboardType, autoFocus, ...others } = this.props;
 
     if (!customKeyboardType) {
       return (
