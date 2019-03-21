@@ -46,14 +46,6 @@ class CustomKeyboardView extends React.Component {
     });
   };
 
-  onLayout = ({ nativeEvent }) => {
-    const width = nativeEvent.layout.width;
-
-    if (width > 0 && width !== this.state.width) {
-      this.setState({ width });
-    }
-  };
-
   componentWillUnmount() {
     this.clearFocusRequest && cancelAnimationFrame(this.clearFocusRequest);
     this.insertTextRequest && cancelAnimationFrame(this.insertTextRequest);
@@ -66,7 +58,7 @@ class CustomKeyboardView extends React.Component {
 
     return (
       <View onLayout={this.onLayout} style={styles.container} ref="keyboard" pointerEvents="box-none">
-        <View style={{ height: this.props.keyboardContainerHeight }} key="keyboard">
+        <View style={{ height: this.props.keyboardContainerHeight, backgroundColor: 'transparent' }} key="keyboard">
           <KeyboardView
             {...this.props}
             onKeyPress={this.handleKeyPress}
