@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 
 class CustomKeyboardView extends React.Component {
   state;
@@ -9,7 +9,7 @@ class CustomKeyboardView extends React.Component {
   clearAllRequest;
 
   state = {
-    width: 0
+    width: 0,
   };
 
   handleDelete = () => {
@@ -20,7 +20,7 @@ class CustomKeyboardView extends React.Component {
     });
   };
 
-  handleKeyPress = key => {
+  handleKeyPress = (key) => {
     this.insertTextRequest && cancelAnimationFrame(this.insertTextRequest);
     this.insertTextRequest = requestAnimationFrame(() => {
       this.props.insertText(this.props.tag, key);
@@ -63,7 +63,7 @@ class CustomKeyboardView extends React.Component {
         <View
           style={{
             height: this.props.keyboardContainerHeight,
-            backgroundColor: "transparent"
+            backgroundColor: 'transparent',
           }}
           key="keyboard"
         >
@@ -84,32 +84,32 @@ class CustomKeyboardView extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "transparent",
-    justifyContent: "flex-start"
+    backgroundColor: 'transparent',
+    justifyContent: 'flex-start',
   },
   top: {
     height: 36,
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: "#a5a5a5",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
+    borderTopColor: '#a5a5a5',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   topLeft: {
     paddingLeft: 15,
-    flexDirection: "row"
+    flexDirection: 'row',
   },
   topDesText: {
-    color: "#adadad",
+    color: '#adadad',
     fontSize: 15,
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
   },
   topCompleteText: {
-    color: "#0297fa",
+    color: '#0297fa',
     fontSize: 15,
     paddingHorizontal: 15,
-    paddingVertical: 10
-  }
+    paddingVertical: 10,
+  },
 });
 
 export default CustomKeyboardView;

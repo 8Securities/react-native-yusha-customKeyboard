@@ -1,12 +1,12 @@
-declare module "react-native-yusha-customkeyboard" {
-  import React, { ComponentType } from "react";
+declare module 'react-native-yusha-customkeyboard' {
+  import React, { ComponentType } from 'react';
   import {
     Constructor,
     EmitterSubscription,
     NativeMethodsMixin,
     ScrollViewProps,
-    TextInputProps
-  } from "react-native";
+    TextInputProps,
+  } from 'react-native';
 
   //keyBoardAPI
   type ShowTipDataType = {
@@ -32,12 +32,12 @@ declare module "react-native-yusha-customkeyboard" {
     WrapedCustomKeyboardViewConfig;
   export function keyBoardAPI<P>(
     customKeyboardType: string,
-    KeyboardComponent: ComponentType<any>
+    KeyboardComponent: ComponentType<any>,
   ): any;
 
   //NumberKeyBoardView
   interface NumberKeyBoardViewProps {
-    keyboardType: "decimal-pad" | "number-pad"; //可切换为ABC的键盘 | 单纯的数字键盘
+    keyboardType: 'decimal-pad' | 'number-pad'; //可切换为ABC的键盘 | 单纯的数字键盘
     disableDot: boolean; //是否有小数点
   }
   class NumberKeyBoardViewComponent extends React.Component<
@@ -70,11 +70,11 @@ declare module "react-native-yusha-customkeyboard" {
   export const currentHeight: number;
 
   //listener
-  type iOSKeyBoardSubscription = "keyboardDidShow" | "keyboardDidHide";
+  type iOSKeyBoardSubscription = 'keyboardDidShow' | 'keyboardDidHide';
   type KeyBoardSubscription = EmitterSubscription | iOSKeyBoardSubscription;
   export function addKeyboardHideListener(): KeyBoardSubscription;
   export function addKeyboardShowListener(): KeyBoardSubscription;
   export function removeKeyboardListener(
-    subscription: KeyBoardSubscription
+    subscription: KeyBoardSubscription,
   ): void;
 }
