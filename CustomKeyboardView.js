@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 class CustomKeyboardView extends React.Component {
   state;
@@ -17,7 +14,7 @@ class CustomKeyboardView extends React.Component {
 
   handleDelete = () => {
     this.backSpaceRequest && cancelAnimationFrame(this.backSpaceRequest);
-    
+
     this.backSpaceRequest = requestAnimationFrame(() => {
       this.props.backSpace(this.props.tag);
     });
@@ -34,15 +31,15 @@ class CustomKeyboardView extends React.Component {
     this.clearFocusRequest && cancelAnimationFrame(this.clearFocusRequest);
 
     this.clearFocusRequest = requestAnimationFrame(() => {
-        this.props.clearFocus(this.props.tag);
+      this.props.clearFocus(this.props.tag);
     });
   };
 
   handleClearAll = () => {
     this.clearAllRequest && cancelAnimationFrame(this.clearAllRequest);
-    
+
     this.clearAllRequest = requestAnimationFrame(() => {
-        this.props.clearAll(this.props.tag);
+      this.props.clearAll(this.props.tag);
     });
   };
 
@@ -51,19 +48,31 @@ class CustomKeyboardView extends React.Component {
     this.insertTextRequest && cancelAnimationFrame(this.insertTextRequest);
     this.backSpaceRequest && cancelAnimationFrame(this.backSpaceRequest);
     this.clearAllRequest && cancelAnimationFrame(this.clearAllRequest);
-  };
+  }
 
   render() {
     const { KeyboardView } = this.props;
 
     return (
-      <View onLayout={this.onLayout} style={styles.container} ref="keyboard" pointerEvents="box-none">
-        <View style={{ height: this.props.keyboardContainerHeight, backgroundColor: 'transparent' }} key="keyboard">
+      <View
+        onLayout={this.onLayout}
+        style={styles.container}
+        ref="keyboard"
+        pointerEvents="box-none"
+      >
+        <View
+          style={{
+            height: this.props.keyboardContainerHeight,
+            backgroundColor: 'transparent',
+          }}
+          key="keyboard"
+        >
           <KeyboardView
             {...this.props}
             onKeyPress={this.handleKeyPress}
             onDelete={this.handleDelete}
             onClearAll={this.handleClearAll}
+            onClearFocus={this.clearFocus}
             keyboardContainerHeight={this.props.keyboardContainerHeight}
             keyboardViewHeight={this.props.keyboardViewHeight}
           />
