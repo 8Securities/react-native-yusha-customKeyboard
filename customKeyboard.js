@@ -7,6 +7,7 @@ import {
   findNodeHandle,
   AppRegistry,
   AppState,
+  Dimensions,
 } from 'react-native';
 import CustomKeyboardView from './CustomKeyboardView'
 import { 
@@ -67,10 +68,10 @@ export class CustomTextInput extends React.Component {
       this.installTime = setTimeout(() => {
         install(findNodeHandle(this.input), this.props.customKeyboardType);
 
-        if (Platform.OS === 'android') {
-          this.showSub = addKeyboardShowListener(this.showKeyboard);
-          this.hideSub = addKeyboardHideListener(this.hideKeyboard);
-        }
+        // if (Platform.OS === 'android') {
+        //   this.showSub = addKeyboardShowListener(this.showKeyboard);
+        //   this.hideSub = addKeyboardHideListener(this.hideKeyboard);
+        // }
 
         if (this.props.autoFocus) {
           TextInput.State.focusTextInput(findNodeHandle(this.input));
@@ -107,7 +108,7 @@ export class CustomTextInput extends React.Component {
   }
 
   showKeyboard = (data) => {
-    if (data.tag !== findNodeHandle(this.input)){
+    if (!data || !data.tag || data.tag !== findNodeHandle(this.input)){
       return;
     }
 
@@ -115,7 +116,7 @@ export class CustomTextInput extends React.Component {
   }
 
   hideKeyboard = (data) => {
-    if (data.tag !== findNodeHandle(this.input)) {
+    if (data && data.tag !== findNodeHandle(this.input)) {
       return;
     }
 
