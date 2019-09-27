@@ -7,7 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.view.WindowManager;
 
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactRootView;
@@ -75,16 +76,27 @@ public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
                                     ((InputMethodManager) getReactApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
                                     curEditText = (ReactEditText) v;
                                     showKeyboard = true;
-                                    WritableMap data = Arguments.createMap();
-                                    data.putInt("tag", tag);
-                                    Log.i("react-native", "------1data: " + data);
-                                    sendEvent("showCustomKeyboard", data);
+
                                     new Handler().postDelayed(new Runnable(){
                                         public void run() {
                                             //execute the task
                                             if(showKeyboard) {
                                                 View keyboard = (View)curEditText.getTag(TAG_ID);
                                                 final Activity activity = getCurrentActivity();
+
+                                                WritableMap coords = Arguments.createMap();
+                                                coords.putDouble("height", 306);
+                                                coords.putDouble("width", activity.getResources().getDisplayMetrics().widthPixels/activity.getResources().getDisplayMetrics().density);
+                                                coords.putDouble("screenX", 0);
+                                                coords.putDouble("screenY", ((activity.getResources().getDisplayMetrics().heightPixels/activity.getResources().getDisplayMetrics().density)-306));
+
+                                                WritableMap data = Arguments.createMap();
+                                                data.putInt("tag", tag);
+                                                data.putMap("endCoordinates", coords);
+                                                
+                                                Log.i("react-native", "------data: " + data);
+                                                sendEvent("keyboardDidShow", data);
+
                                                 if (keyboard.getParent() == null) {
                                                     activity.addContentView(keyboard, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                                                 }
@@ -102,7 +114,7 @@ public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
                                     WritableMap data = Arguments.createMap();
                                     data.putInt("tag", tag);
                                     Log.i("react-native", "------data: " + data);
-                                    sendEvent("hideCustomKeyboard", data);
+                                    sendEvent("keyboardDidHide", data);
                                 }
                             }
                         }

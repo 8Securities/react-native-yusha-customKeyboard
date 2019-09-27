@@ -6,11 +6,13 @@ import {
 
 export const addKeyboardShowListener = (listener) => {
   if (Platform.OS === 'android') {
-    return NativeAppEventEmitter.addListener('showCustomKeyboard', (data) => {
+    return NativeAppEventEmitter.addListener('keyboardDidShow', (data) => {
       listener(data);
     })
   } else {
-    Keyboard.addListener('keyboardDidShow', () => listener());
+    Keyboard.addListener('keyboardDidShow', (data) => {
+      listener(data);
+    });
 
     return 'keyboardDidShow';
   }
@@ -18,15 +20,13 @@ export const addKeyboardShowListener = (listener) => {
 
 export const addKeyboardHideListener = (listener) => {
   if (Platform.OS === 'android') {
-    return NativeAppEventEmitter.addListener('hideCustomKeyboard', (data) => {
+    NativeAppEventEmitter.addListener('keyboardDidHide', (data) => {
       listener(data);
-    })
-  } else {
-    Keyboard.addListener('keyboardDidHide', () => {
-      listener();
     });
-
-    return 'keyboardDidHide';
+  } else {
+    Keyboard.addListener('keyboardDidHide', (data) => {
+      listener(data);
+    });
   }
 };
 
