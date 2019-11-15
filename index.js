@@ -1,6 +1,7 @@
 import {
     keyBoardAPI,
     CustomTextInput,
+    height,
 } from './customKeyboard'
 
 import { 
@@ -15,4 +16,5 @@ export {
     addKeyboardShowListener,
     CustomTextInput,
     keyBoardAPI,
+    height,
 }

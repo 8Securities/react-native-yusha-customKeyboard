@@ -66,8 +66,7 @@ declare module 'react-native-yusha-customkeyboard' {
   export var CustomTextInput: CustomTextInputStatic;
   export type CustomTextInput = CustomTextInputStatic;
 
-  //currentHeight
-  export const currentHeight: number;
+  export const height: number;
 
   //listener
   type iOSKeyBoardSubscription = 'keyboardDidShow' | 'keyboardDidHide';

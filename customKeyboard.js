@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   Platform,
@@ -7,12 +6,9 @@ import {
   findNodeHandle,
   AppRegistry,
   AppState,
-  Dimensions,
 } from 'react-native';
 import CustomKeyboardView from './CustomKeyboardView'
 import { 
-  addKeyboardHideListener,
-  addKeyboardShowListener,
   removeKeyboardListener,
 } from './keyboardEvents';
 
@@ -26,12 +22,15 @@ const {
   clearAll, keyboardHeight
 } = CustomKeyboard;
 
+const height = Platform.OS === 'ios' ? keyboardHeight : 306;
+
 export {
   install, uninstall,
   insertText, backSpace, doDelete,
   moveLeft, moveRight,
   switchSystemKeyboard,
   clearAll,
+  height,
 };
 
 const keyboardTypeRegistry = {};
@@ -44,7 +43,7 @@ export const clearFocus = (tag) => {
   TextInput.State.blurTextInput(tag);
 };
 
-const CustomKeyboardContainer = ({ tag, type, ...rest }) => {
+const CustomKeyboardContainer = ({ tag, type }) => {
   const factory = keyboardTypeRegistry[type];
 
   if (!factory) {
@@ -67,11 +66,6 @@ export class CustomTextInput extends React.Component {
     if (this.props.customKeyboardType) {
       this.installTime = setTimeout(() => {
         install(findNodeHandle(this.input), this.props.customKeyboardType);
-
-        // if (Platform.OS === 'android') {
-        //   this.showSub = addKeyboardShowListener(this.showKeyboard);
-        //   this.hideSub = addKeyboardHideListener(this.hideKeyboard);
-        // }
 
         if (this.props.autoFocus) {
           TextInput.State.focusTextInput(findNodeHandle(this.input));
@@ -161,7 +155,7 @@ export function keyBoardAPI(keyboardName, KeyboardView) {
           clearAll={clearAll}
           backSpace={backSpace}
           keyboardContainerHeight={keyboardHeight}
-          keyboardViewHeight={Platform.OS === 'ios' ? 252 : 306}
+          keyboardViewHeight={Platform.OS === 'ios' ? keyboardHeight : 306}
           KeyboardView={KeyboardView}
           {...this.props}
         />
