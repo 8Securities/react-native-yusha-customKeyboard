@@ -155,7 +155,7 @@ export function keyBoardAPI(keyboardName, KeyboardView) {
           clearAll={clearAll}
           backSpace={backSpace}
           keyboardContainerHeight={keyboardHeight}
-          keyboardViewHeight={Platform.OS === 'ios' ? keyboardHeight : 306}
+          keyboardViewHeight={Platform.OS === 'ios' ? 252 : 306}
           KeyboardView={KeyboardView}
           {...this.props}
         />
